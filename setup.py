@@ -6,10 +6,10 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="audioprocessor",
-    version="0.1.1",
+    version="0.1.3",
     packages=find_packages(),
     install_requires=[
-        "speech_recognition",
+        "speechrecognition",
         "gtts",
         "pyaudio",
         "wave",

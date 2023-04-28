@@ -1,4 +1,4 @@
-speech_recognition
+speechrecognition
 gtts
 pyaudio
 wave

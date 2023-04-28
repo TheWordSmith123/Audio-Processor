@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: audioprocessor
-Version: 0.1.1
+Version: 0.1.3
 Summary: A Python package for recording, transcribing, and converting audio
 Home-page: https://github.com/TheWordSmith123/Audio-Processor
 Author: Andrew Horvath
