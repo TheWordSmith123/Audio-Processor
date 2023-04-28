@@ -1,13 +1,13 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 from pathlib import Path
 
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name="audioprocessor",
-    version="0.1.3",
-    packages=find_packages(),
+    name="AudioProcessor",
+    version="0.1.4",
+    packages=["AudioProcessor"],
     install_requires=[
         "speechrecognition",
         "gtts",

@@ -5,7 +5,6 @@ import wave
 import webrtcvad
 import os
 import tempfile
-from pydub import AudioSegment
 import pydub
 
 class AudioProcessor:
@@ -190,25 +189,25 @@ class AudioProcessor:
 
         return segments
 
-def main():
-    audio_processor = AudioProcessor()
+# def main():
+#     audio_processor = AudioProcessor()
 
-    # Test 1: Record audio from the microphone and save it to a .wav file
-    print("\nTest 1: Record audio from the microphone and save it to a .wav file")
-    output_audio_file_path = "recorded_audio.wav"
-    audio_processor.record_audio(output_audio_file_path)
+#     # Test 1: Record audio from the microphone and save it to a .wav file
+#     print("\nTest 1: Record audio from the microphone and save it to a .wav file")
+#     output_audio_file_path = "recorded_audio.wav"
+#     audio_processor.record_audio(output_audio_file_path)
 
-    # Test 2: Transcribe an audio file
-    print("\nTest 2: Transcribe an audio file")
-    audio_file_path = "Audio.wav"
-    transcribed_text = audio_processor.audio_to_text(audio_file_path)
-    print("Transcribed text: {}".format(transcribed_text))
+#     # Test 2: Transcribe an audio file
+#     print("\nTest 2: Transcribe an audio file")
+#     audio_file_path = "Audio.wav"
+#     transcribed_text = audio_processor.audio_to_text(audio_file_path)
+#     print("Transcribed text: {}".format(transcribed_text))
 
-    # Test 3: Text to audio and play it
-    print("\nTest 3: Text to audio and play it")
-    text = "This is a test for text to audio conversion."
-    output_audio_file_path = "output_audio.wav"
-    audio_processor.text_to_audio(text, output_audio_file_path)
+#     # Test 3: Text to audio and play it
+#     print("\nTest 3: Text to audio and play it")
+#     text = "This is a test for text to audio conversion."
+#     output_audio_file_path = "output_audio.wav"
+#     audio_processor.text_to_audio(text, output_audio_file_path)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
