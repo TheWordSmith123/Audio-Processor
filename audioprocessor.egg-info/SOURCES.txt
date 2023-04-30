@@ -1,3 +1,5 @@
+LICENSE
+README.md
 setup.py
 AudioProcessor/AudioProcessor.py
 AudioProcessor/__init__.py

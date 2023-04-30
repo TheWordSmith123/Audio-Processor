@@ -1,85 +1,69 @@
 AudioProcessor
 ==============
 
-`AudioProcessor` is a Python class that provides functionality for recording audio, transcribing audio to text, and converting text to audio.
+AudioProcessor is a Python library that provides a simple interface to perform various audio processing tasks such as recording, voice-to-text conversion, text-to-voice conversion, and audio playback.
 
-Class Methods
--------------
+Installation
+------------
 
-### `__init__(self, frame_duration_ms=30, sample_rate=16000, chunk_size=1024, vad_mode=2)`
+To use AudioProcessor, make sure you have the following packages installed:
 
-Initialize the `AudioProcessor` class.
+*   pyaudio
+*   pydub
+*   pydub.effects
+*   speech\_recognition
+*   webrtcvad
+*   gtts
 
-**Parameters:**
+You can install these packages using pip:
 
-*   `frame_duration_ms`: Frame duration in milliseconds (default: 30 ms)
-*   `sample_rate`: Audio sample rate (default: 16000 Hz)
-*   `chunk_size`: Audio chunk size for processing (default: 1024)
-*   `vad_mode`: Voice Activity Detection (VAD) mode (default: 2)
+`pip install pyaudio pydub speechrecognition webrtcvad gtts`
 
-### `record_audio(self, output_file_path)`
+Usage
+-----
 
-Record audio from the microphone and save it to a .wav file.
+To use AudioProcessor, simply import the `AudioProcessor` class and create an instance:
 
-**Parameters:**
+`from audio_processor import AudioProcessor  processor = AudioProcessor()`
 
-*   `output_file_path`: Output file path for the recorded audio
+### Recording audio
 
-### `audio_to_text(self, audio_file_path, **kwargs)`
+To record audio, use the `record_audio` method:
 
-Transcribe an audio file.
+`processor.record_audio("output_file.wav")`
 
-**Parameters:**
+This method records audio from the microphone and saves it to a .wav file.
 
-*   `audio_file_path`: Input audio file path
-*   `**kwargs`: Keyword arguments for preprocessing and other options
+### Voice-to-text conversion
 
-**Returns:**
+To convert an audio file to text, use the `audio_to_text` method:
 
-*   Transcribed text as a string
+`text = processor.audio_to_text("input_file.wav")`
 
-### `text_to_audio(self, text, audio_file_path, lang='en', volume=1.0, sample_rate=44100, bit_depth=16)`
+### Text-to-voice conversion
 
-Convert text to an audio file and play it.
+To convert text to an audio file, use the `text_to_audio` method:
 
-**Parameters:**
+`processor.text_to_audio("Hello world!", "output_file.wav")`
 
-*   `text`: Input text to convert to audio
-*   `audio_file_path`: Output audio file path
-*   `lang`: Language of the text (default: 'en')
-*   `volume`: Volume level of the output audio (default: 1.0)
-*   `sample_rate`: Audio sample rate (default: 44100 Hz)
-*   `bit_depth`: Audio bit depth (default: 16)
+### Audio playback
 
-Private Methods
----------------
+To play an audio file, use the `play_audio_file` method:
 
-These methods are used internally by the class and should not be called directly by the user.
+`processor.play_audio_file("input_file.wav")`
 
-### `_save_audio_to_file(self, audio, file_path)`
+Class Parameters
+----------------
 
-Save the audio data to a .wav file.
+The `AudioProcessor` class can be initialized with the following parameters:
 
-### `_process_audio_text(self, audio_text, **kwargs)`
+*   `frame_duration_ms`: (int) Frame duration in milliseconds for Voice Activity Detection (default: 30)
+*   `sample_rate`: (int) Sample rate of the audio in Hz (default: 16000)
+*   `chunk_size`: (int) Chunk size for audio playback (default: 1024)
+*   `vad_mode`: (int) Voice Activity Detection mode, an integer between 0 and 3 (default: 2)
+*   `log_level`: (int) Logging level, an integer between 0 and 50 (default: logging.WARNING)
 
-Process the audio\_text and return the transcribed text.
+License
+-------
 
-### `_parse_recognition_response(self, response, show_all)`
-
-Parse the response from the speech recognizer.
-
-### `_process_recognized_audio(self, audio)`
-
-Process the recognized audio and return the transcribed text.
-
-### `_play_audio_file(self, audio_file_path, volume=1.0, normalize=False)`
-
-Play the audio file with the specified volume and optional normalization.
-
-### `_generate_frames(self, audio, sample_rate, frame_duration_ms)`
-
-Generate audio frames from raw audio data.
-
-### `_collect_voiced_segments(self, frames, vad, sample_rate, ratio=2)`
-
-Collect voiced segments from audio frames using the Voice Activity Detection (VAD) algorithm.
+This project is licensed under the MIT License.
