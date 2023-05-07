@@ -62,9 +62,11 @@ class AudioProcessor:
         self.vad = webrtcvad.Vad()
         self.vad.set_mode(self.vad_mode)
 
-        # Initialize audio interface using a context manager to ensure proper cleanup
-        with pyaudio.PyAudio() as audio_interface:
-            self.audio_interface = audio_interface
+        self.audio_interface = pyaudio.PyAudio()
+
+    def __del__(self):
+        """Close the audio interface upon object deletion."""
+        self.audio_interface.terminate()
 
     def __enter__(self):
         """Initialize the audio interface and return the AudioProcessor instance."""
@@ -188,22 +190,13 @@ class AudioProcessor:
 
         try:
             audio = gTTS(text=text, lang=lang, slow=False)
-            audio = audio.get_audio_data(
-                rate=sample_rate, width=bit_depth // 8, normalize=False)
-            with wave.open(audio_file_path, "wb") as wf:
-                wf.setnchannels(1)
-                wf.setsampwidth(bit_depth // 8)
-                wf.setframerate(sample_rate)
-                wf.writeframes(audio)
+            audio.save(audio_file_path)
 
             self.logger.info(f"Saved audio file: {audio_file_path}")
 
         except Exception as e:
             self.logger.error(f"Error: {e}")
             return
-
-        self._play_audio_file(audio_file_path,
-                              volume=volume)
 
     def play_audio_file(self, audio_file_path: str, volume: float = 1.0) -> None:
         """Play a given audio file, adjusting the volume as necessary."""
@@ -257,3 +250,24 @@ class AudioProcessor:
             if vad.is_speech(frame, sample_rate):
                 voiced_segments.append(frame)
         return voiced_segments
+
+def main():
+    audio_processor = AudioProcessor()
+
+    # Record audio from microphone and save to file
+    audio_file_path = "test_audio.wav"
+    print("Recording Audio...")
+    audio_processor.record_audio(audio_file_path)
+
+    # Convert audio to text
+    audio_text = audio_processor.audio_to_text(audio_file_path)
+    print("Audio to text:")
+    print(audio_text)
+
+    # Convert text to audio and play back
+    audio_output_path = "test_output.wav"
+    audio_processor.text_to_audio("This is a test.", audio_output_path)
+    audio_processor.play_audio_file(audio_output_path)
+
+if __name__ == "__main__":
+    main()

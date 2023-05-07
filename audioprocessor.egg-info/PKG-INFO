@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: AudioProcessor
-Version: 0.2.0
+Version: 0.2.1
 Summary: A Python package for recording, transcribing, and converting audio
 Home-page: https://github.com/TheWordSmith123/Audio-Processor
 Author: Andrew Horvath
@@ -10,7 +10,6 @@ Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3.11
 Description-Content-Type: text/markdown
-License-File: LICENSE
 
 AudioProcessor
 ==============
